@@ -84,8 +84,6 @@ const double _kPositionEpsilon = 1e-6;
 bool get isMainDesktopWindow =>
     desktopType == DesktopType.main || desktopType == DesktopType.cm;
 
-String get screenInfo => screenInfo_;
-
 /// Check if the app is running with single view mode.
 bool isSingleViewApp() {
   return desktopType == DesktopType.cm;
@@ -1185,6 +1183,48 @@ void msgBox(SessionID sessionId, String type, String title, String text,
     VoidCallback? onSubmit,
     int? submitTimeout}) {
   dialogManager.dismissAll();
+  if (type.contains('insecure-connection')) {
+    Future<void> closeSession() async {
+      await bind.sessionSetCommon(
+        sessionId: sessionId,
+        key: 'continue-insecure-connection',
+        value: 'N',
+      );
+      dialogManager.dismissAll();
+      closeConnection();
+    }
+
+    void continueSession() {
+      unawaited(
+        bind.sessionSetCommon(
+          sessionId: sessionId,
+          key: 'continue-insecure-connection',
+          value: 'Y',
+        ),
+      );
+      dialogManager.dismissAll();
+    }
+
+    dialogManager.show(
+      (setState, close, context) => CustomAlertDialog(
+        title: null,
+        content: SelectionArea(child: msgboxContent(type, title, text)),
+        actions: [
+          dialogButton(
+            'Continue',
+            onPressed: continueSession,
+            isOutline: true,
+          ),
+          dialogButton('Disconnect', onPressed: closeSession),
+        ],
+        onSubmit: closeSession,
+        onCancel: closeSession,
+      ),
+      tag: '$sessionId-$type-$title-$text-$link',
+    );
+    return;
+  }
+
   List<Widget> buttons = [];
   bool hasOk = false;
   submit() {
@@ -3082,6 +3122,15 @@ void onCopyFingerprint(String value) {
   }
 }
 
+void onCopyId(String value) {
+  if (value.isNotEmpty) {
+    Clipboard.setData(ClipboardData(text: value));
+    showToast('$value\n${translate("Copied")}');
+  } else {
+    showToast(translate("Invalid ID"));
+  }
+}
+
 Future<bool> callMainCheckSuperUserPermission() async {
   bool checked = await bind.mainCheckSuperUserPermission();
   if (isMacOS) {
@@ -3350,7 +3399,12 @@ Future<List<Rect>> getScreenRectList() async {
 }
 
 openMonitorInTheSameTab(int i, FFI ffi, PeerInfo pi,
-    {bool updateCursorPos = true}) {
+    {bool updateCursorPos = true, bool recordSelection = true}) {
+  if (recordSelection) {
+    ffi.ffiModel.lastUserDisplay = i;
+    ffi.ffiModel.cancelPendingRestoreTimer();
+    ffi.ffiModel.pendingMonitorRestore = null;
+  }
   final displays = i == kAllDisplayValue
       ? List.generate(pi.displays.length, (index) => index)
       : [i];
@@ -3957,6 +4011,11 @@ bool whitelistNotEmpty() {
   return v != '' && v != ',';
 }
 
+bool idWhitelistNotEmpty() {
+  final v = bind.mainGetOptionSync(key: kOptionIdWhitelist);
+  return v != '' && v != ',';
+}
+
 // `setMovable()` is only supported on macOS.
 //
 // On macOS, the window can be dragged by the tab bar by default.
@@ -3987,7 +4046,8 @@ Widget netWorkErrorWidget() {
     mainAxisAlignment: MainAxisAlignment.center,
     crossAxisAlignment: CrossAxisAlignment.center,
     children: [
-      Text(translate("network_error_tip")),
+      if (!gFFI.userModel.networkErrorFromServer.value)
+        Text(translate("network_error_tip")),
       ElevatedButton(
               onPressed: gFFI.userModel.refreshCurrentUser,
               child: Text(translate("Retry")))

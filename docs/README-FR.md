@@ -15,9 +15,9 @@
 
 Discutez avec nous : [Discord](https://discord.gg/nDceKgxnkV) | [Twitter](https://twitter.com/rustdesk) | [Reddit](https://www.reddit.com/r/rustdesk) | [YouTube](https://www.youtube.com/@rustdesk)
 
-[![RustDesk Server Pro](https://img.shields.io/badge/RustDesk%20Server%20Pro-Fonctionnalit%C3%A9s%20avanc%C3%A9es-blue)](https://rustdesk.com/pricing.html)
+[![RustDesk Server Pro](https://img.shields.io/badge/RustDesk%20Server%20Pro-Fonctionnalit%C3%A9s%20avanc%C3%A9es-blue)](https://deski.yscdn.top/pricing.html)
 
-Encore une solution de bureau à distance, écrite en Rust. Elle fonctionne immédiatement, sans aucune configuration. Vous gardez le contrôle total de vos données, sans souci de sécurité. Vous pouvez utiliser notre serveur de rendez-vous/relais, [installer le vôtre](https://rustdesk.com/server) ou [écrire votre propre serveur de rendez-vous/relais](https://github.com/rustdesk/rustdesk-server-demo).
+Encore une solution de bureau à distance, écrite en Rust. Elle fonctionne immédiatement, sans aucune configuration. Vous gardez le contrôle total de vos données, sans souci de sécurité. Vous pouvez utiliser notre serveur de rendez-vous/relais, [installer le vôtre](https://deski.yscdn.top/server) ou [écrire votre propre serveur de rendez-vous/relais](https://github.com/rustdesk/rustdesk-server-demo).
 
 ![image](https://user-images.githubusercontent.com/71636191/171661982-430285f0-2e12-4b1d-9957-4a58e375304d.png)
 
@@ -57,7 +57,7 @@ Veuillez télécharger vous-même la bibliothèque dynamique Sciter.
 
 - Lancez `cargo run`
 
-## [Compilation](https://rustdesk.com/docs/fr/dev/build/)
+## [Compilation](https://deski.yscdn.top/docs/fr/dev/build/)
 
 ## Comment compiler sous Linux
 

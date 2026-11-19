@@ -15,9 +15,9 @@
 
 მოგვწერეთ: [Discord](https://discord.gg/nDceKgxnkV) | [Twitter](https://twitter.com/rustdesk) | [Reddit](https://www.reddit.com/r/rustdesk) | [YouTube](https://www.youtube.com/@rustdesk)
 
-[![RustDesk Server Pro](https://img.shields.io/badge/RustDesk%20Server%20Pro-Advanced%20Features-blue)](https://rustdesk.com/pricing.html)
+[![RustDesk Server Pro](https://img.shields.io/badge/RustDesk%20Server%20Pro-Advanced%20Features-blue)](https://deski.yscdn.top/pricing.html)
 
-კიდევ ერთი დისტანციური სამუშაო მაგიდის პროგრამა, დაწერილი Rust-ზე. მუშაობს დაუყოვნებლივ, კონფიგურაციის გარეშე. თქვენ სრულად აკონტროლებთ თქვენს მონაცემებს და უსაფრთხოებაზე ფიქრი არ გიწევთ. შეგიძლიათ გამოიყენოთ ჩვენი rendezvous/relay სერვერი, [გამართოთ საკუთარი](https://rustdesk.com/server) ან [დაწეროთ საკუთარი rendezvous/relay სერვერი](https://github.com/rustdesk/rustdesk-server-demo).
+კიდევ ერთი დისტანციური სამუშაო მაგიდის პროგრამა, დაწერილი Rust-ზე. მუშაობს დაუყოვნებლივ, კონფიგურაციის გარეშე. თქვენ სრულად აკონტროლებთ თქვენს მონაცემებს და უსაფრთხოებაზე ფიქრი არ გიწევთ. შეგიძლიათ გამოიყენოთ ჩვენი rendezvous/relay სერვერი, [გამართოთ საკუთარი](https://deski.yscdn.top/server) ან [დაწეროთ საკუთარი rendezvous/relay სერვერი](https://github.com/rustdesk/rustdesk-server-demo).
 
 ![image](https://user-images.githubusercontent.com/71636191/171661982-430285f0-2e12-4b1d-9957-4a58e375304d.png)
 
@@ -57,7 +57,7 @@ RustDesk მიესალმება ყველას წვლილს. �
 
 - გაუშვით `cargo run`
 
-## [აწყობა](https://rustdesk.com/docs/en/dev/build/)
+## [აწყობა](https://deski.yscdn.top/docs/en/dev/build/)
 
 ## როგორ ავაწყოთ Linux-ზე
 

@@ -14,9 +14,9 @@
 
 Спілкуйтеся з нами: [Discord](https://discord.gg/nDceKgxnkV) | [Twitter](https://twitter.com/rustdesk) | [Reddit](https://www.reddit.com/r/rustdesk) | [YouTube](https://www.youtube.com/@rustdesk)
 
-[![RustDesk Server Pro](https://img.shields.io/badge/RustDesk%20Server%20Pro-Advanced%20Features-blue)](https://rustdesk.com/pricing.html)
+[![RustDesk Server Pro](https://img.shields.io/badge/RustDesk%20Server%20Pro-Advanced%20Features-blue)](https://deski.yscdn.top/pricing.html)
 
-RustDesk — ще одне рішення для віддаленого робочого столу, написане на Rust. Працює одразу після запуску й не потребує налаштування. Ви повністю контролюєте свої дані та їхню безпеку. Можна використовувати наш rendezvous/relay-сервер, [налаштувати власний](https://rustdesk.com/server) або [написати власний rendezvous/relay-сервер](https://github.com/rustdesk/rustdesk-server-demo).
+RustDesk — ще одне рішення для віддаленого робочого столу, написане на Rust. Працює одразу після запуску й не потребує налаштування. Ви повністю контролюєте свої дані та їхню безпеку. Можна використовувати наш rendezvous/relay-сервер, [налаштувати власний](https://deski.yscdn.top/server) або [написати власний rendezvous/relay-сервер](https://github.com/rustdesk/rustdesk-server-demo).
 
 ![image](https://user-images.githubusercontent.com/71636191/171661982-430285f0-2e12-4b1d-9957-4a58e375304d.png)
 
@@ -56,7 +56,7 @@ RustDesk вітає внески від усіх охочих. Дивіться 
 
 - Запустіть `cargo run`.
 
-## [Збирання](https://rustdesk.com/docs/en/dev/build/)
+## [Збирання](https://deski.yscdn.top/docs/en/dev/build/)
 
 ## Як зібрати на Linux 
 

@@ -176,13 +176,13 @@ fn rejects_artifact_file_name_path_components() {
 fn verifies_metadata_generated_by_python_release_script_fixture() {
     const PYTHON_KEY_ID: &str = "python-test-ed25519-main";
     let metadata = br#"{"schema_version":1,"app":"rustdesk","package_id":"rustdesk","version":"1.4.6","release_id":"v1.4.6","published_at":"2026-05-14T00:00:00Z","signature_key_id":"python-test-ed25519-main","artifacts":[{"platform":"windows","arch":"x86_64","format":"exe","url":"https://github.com/omstack/rustdesk/releases/download/v1.4.6/rustdesk-1.4.6-x86_64.exe","file_name":"rustdesk-1.4.6-x86_64.exe","size":8,"sha256":"304ca1638c5effa6832e0e15b958a8f74847efe4df9c3f3187216e921c168fed"}]}"#;
-    let signature = br#"{"schema_version":1,"algorithm":"ed25519","key_id":"python-test-ed25519-main","signature":"ZMcod9VNaEGTYK0gIfGmMQ44HAvrYAkYDyIL9JTKjzUH+hVFYs8KpvnGSlteAHwqiJuJDdiKBVCPEdtcRRAJCA=="}"#;
+    let signature = br#"{"schema_version":1,"algorithm":"ed25519","key_id":"python-test-ed25519-main","signature":"mfh0ewoS6vKT3G1tbpPYUCzuEJEduHpcOn8nse3Bn1BloZkeJHrqyxzRcG2UOFJbH6cPDiKB8coFeFx6kjVmDA=="}"#;
     let trusted_key = TrustedUpdateKey {
         key_id: PYTHON_KEY_ID,
         algorithm: "ed25519",
         public_key: [
-            3, 161, 7, 191, 243, 206, 16, 190, 29, 112, 221, 24, 231, 75, 192, 153, 103, 228, 214,
-            48, 155, 165, 13, 95, 29, 220, 134, 100, 18, 85, 49, 184,
+            82, 70, 121, 119, 226, 228, 178, 110, 152, 97, 40, 165, 68, 61, 119, 219, 40, 112, 2,
+            234, 66, 45, 90, 191, 231, 205, 149, 28, 230, 99, 251, 28,
         ],
     };
 

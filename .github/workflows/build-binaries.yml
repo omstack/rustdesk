@@ -735,9 +735,14 @@ jobs:
         if: env.PUBLISH_UPDATE_METADATA == 'true'
         run: |
           python3 -m unittest res/update/test_macos_update_scripts.py
-          cargo test --locked --release --lib platform::macos::update_tests --features "flutter,hwcodec,unix-file-copy-paste${{ matrix.job.extra-cargo-features }}"
-          cargo test --locked --release --lib verified_dmg_tests --features "flutter,hwcodec,unix-file-copy-paste${{ matrix.job.extra-cargo-features }}"
-          cargo test --locked --release --lib update_metadata::tests --features "flutter,hwcodec,unix-file-copy-paste${{ matrix.job.extra-cargo-features }}"
+          # Use the exact feature set from the build above so cargo reuses its target
+          # cache. Hardcoding a shorter list invalidates every dependency crate and
+          # forces a second full rebuild (~1h on the Intel runner, which then gets killed).
+          FEATURES=$(./build.py --flutter --hwcodec --unix-file-copy-paste ${{ matrix.job.extra-build-args }} --print-features)
+          echo "Test features: $FEATURES"
+          cargo test --locked --release --lib platform::macos::update_tests --features "$FEATURES"
+          cargo test --locked --release --lib verified_dmg_tests --features "$FEATURES"
+          cargo test --locked --release --lib update_metadata::tests --features "$FEATURES"
 
       - name: Run the Rust tests
         if: ${{ env.UPLOAD_ARTIFACT != 'true' && matrix.job.arch == 'aarch64' }}
@@ -974,9 +979,16 @@ jobs:
             --volume "/opt/artifacts:/opt/artifacts"
           shell: /bin/bash
           install: |
-            apt-get update -y
+            # Ubuntu 18.04 is EOL: archive/security mirrors are flaky and often time out
+            # from GitHub runners. Retry apt aggressively and don't fail on transient
+            # single-package fetch errors (a missing pkg is retried on the next pass).
+            echo 'Acquire::Retries "10";' > /etc/apt/apt.conf.d/99retries
+            echo 'Acquire::http::Timeout "120";' >> /etc/apt/apt.conf.d/99retries
+            echo 'Acquire::https::Timeout "120";' >> /etc/apt/apt.conf.d/99retries
+            echo 'Acquire::http::Pipeline-Depth "0";' >> /etc/apt/apt.conf.d/99retries
+            apt-get update -y || apt-get update -y || apt-get update -y
             echo -e "installing deps"
-            apt-get install -y \
+            apt-get install -y --fix-missing \
                build-essential \
                clang \
                cmake \
